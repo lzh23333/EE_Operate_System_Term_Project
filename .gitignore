@@ -2,5 +2,11 @@
 .vscode/
 bank_problem/bank
 
-#ºöÂÔzip
+#zip
+*.mk
+*.cmd
+.tmp_versions/
 *.zip
+*.o
+*.ko
+
