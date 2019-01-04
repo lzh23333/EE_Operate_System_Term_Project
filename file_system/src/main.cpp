@@ -65,7 +65,7 @@ void physicalDisk(int fd){
     hd_geometry hdio;
     ioctl(fd,HDIO_GETGEO,&hdio);
     std::cout << "sector size: " << size << " B " << std::endl
-             <<"disk size: " << disk_size << "B" << std::endl
+             <<"sectors: " << disk_size/size  << std::endl
             <<"磁头:" << int(hdio.heads) <<std::endl
            <<"柱面:"<<hdio.cylinders << std::endl
           <<"扇区:"<< int(hdio.sectors) << std::endl
@@ -75,14 +75,9 @@ void physicalDisk(int fd){
 
 int main(int argc, char *argv[])
 {
-    int fd = open("/dev/sdb1",O_RDONLY);
+    int fd = open("/dev/sda",O_RDONLY);
     std::cout << fd << std::endl;
-    /*int sectorsize = get_sector_size(fd);
-    char p[512];
-    std::cout << sectorRead(fd,0,p) << std::endl;
-    for(int i = 0; i < sectorsize; i++)
-        std::cout << int(p[i]) << ' ' ;
-    */
+   
     physicalDisk(fd);
     char * p;
 

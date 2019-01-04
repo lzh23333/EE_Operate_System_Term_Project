@@ -46,45 +46,7 @@ static struct file_operations my_pipe_fo = {    //文件操作结构
 };
 
 static int __init my_pipe_init(void){   //字符设备注册
-    /*
-    int res;
-    printk(KERN_INFO "my_pipe init \n");
-    if(pipe_major){
-        res = register_chrdev_region(MKDEV(pipe_major,pipe_minor),cdev_count,my_dev_name);
-    }
-    else{
-        res = alloc_chrdev_region(&pipe_dev, pipe_minor, cdev_count, my_dev_name);
-        pipe_major = MAJOR(pipe_dev);
-    }
-
-    //若没有分配到主设备号
-    if(res < 0){
-        printk(KERN_WARNING"cannot register my_pipe major!\n");
-        return res;
-    }
     
-    my_pipe_device = kmalloc(sizeof(struct pipe_struct),GFP_KERNEL);
-    //字符设备结构初始化
-    my_pipe_device->cdev = *cdev_alloc();
-    cdev_init(&(my_pipe_device->cdev), &my_pipe_fo);
-    my_pipe_device->cdev.owner = THIS_MODULE;
-    my_pipe_device->cdev.ops = &my_pipe_fo;
-
-    my_pipe_device->wr = 0;
-    my_pipe_device->rd = 0;
-    my_pipe_device->data_size = 0;
-    sema_init(&my_pipe_device->sem,1);
-
-    res = cdev_add(&(my_pipe_device->cdev),pipe_dev,cdev_count);
-    
-
-    if(res){
-        printk(KERN_WARNING"cannot register my_pipe chrdev!\n");
-        cdev_del(&(my_pipe_device->cdev));
-        return -ENOMEM;
-    }
-
-    */
     int dev_id = register_chrdev(pipe_major,my_dev_name,&my_pipe_fo);
     my_pipe_device.wr = 0;
     my_pipe_device.rd = 0;
